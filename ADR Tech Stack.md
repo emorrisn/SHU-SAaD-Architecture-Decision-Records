@@ -42,4 +42,3 @@ This approach directly addresses the CMS’s extensibility and scalability goals
 * **Vendor lock-in:** Deep integration with Azure services may make migration to other cloud providers difficult.  
 * **Learning curve:** Teams unfamiliar with .NET Core and Azure services may require training and onboarding time.  
 * **Complexity in setup:** Multi-service deployment pipelines require proper DevOps configuration to avoid integration issues.
-
