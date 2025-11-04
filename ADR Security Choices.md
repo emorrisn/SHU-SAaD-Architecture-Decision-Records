@@ -16,7 +16,7 @@ How can we implement a security foundation based on Zero-Trust principles to man
 
 * **Zero-Trust with Centralized Secrets Vault and TLS:** Implement a dedicated Secrets Vault for all sensitive credentials and enforce Transport Layer Security (TLS/HTTPS) for all network communication.
 
-* **Service Mesh with Mutual TLS (mTLS):** Implement a service mesh (e.g., Istio) to automatically manage mTLS between all services, providing identity and encryption at the network layer.
+* **Service Mesh with Mutual TLS (mTLS):** Implement a service mesh (e.g. Istio) to automatically manage mTLS between all services, providing identity and encryption at the network layer.
 
 ## Decision Outcome
 
@@ -24,7 +24,7 @@ Chosen option: “Zero-Trust with Centralized Secrets Vault and TLS”, as it pr
 
 This approach aligns with fundamental architectural security practices:
 
-* **Secrets Vault (e.g., HashiCorp Vault or Cloud Key Vault):** All database credentials, external API keys, and private service certificates will be stored in a centralized, dedicated Secrets Vault. This enables automated credential rotation (meeting the goal of the 'Rotate Database Credentials' story) and enforces the Principle of Least Privilege by allowing services to retrieve secrets only when necessary.
+* **Secrets Vault (e.g. HashiCorp Vault or Cloud Key Vault):** All database credentials, external API keys, and private service certificates will be stored in a centralized, dedicated Secrets Vault. This enables automated credential rotation (meeting the goal of the 'Rotate Database Credentials' story) and enforces the Principle of Least Privilege by allowing services to retrieve secrets only when necessary.
 
 * **TLS/HTTPS Mandatory:** All external and internal service-to-service communication will be strictly enforced over HTTPS (TLS). This ensures that all data transmitted is encrypted (security-in-transit), establishing a secure channel between components.
 

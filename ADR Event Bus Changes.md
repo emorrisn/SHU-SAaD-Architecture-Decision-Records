@@ -14,7 +14,7 @@ Relying solely on an asynchronous outbox introduces complexity and potential del
 The Complaint Service will adopt a Hybrid Persistence Model:
 
 1. Synchronous Write: The Command Handlers will commit the state change (the complaint record) synchronously to the PostgreSQL Database via the Complaint Repository (JPA). The database remains the primary source of truth for the complaint's current state.
-2. Asynchronous Notification: Immediately following the successful database transaction commit, the Complaint Event Producer (Spring Kafka Template) will publish the corresponding domain event (e.g., ComplaintLogged).  
+2. Asynchronous Notification: Immediately following the successful database transaction commit, the Complaint Event Producer (Spring Kafka Template) will publish the corresponding domain event (e.g. ComplaintLogged).  
 
 ## Consequences
 
