@@ -16,7 +16,7 @@ The challenge is:
 
 ## Decision Outcome
 
-Chosen option: **“.NET Core + React + Azure”**, because it provides a robust, enterprise-ready foundation that supports both immediate and future scalability needs of the CMS. The stack integrates seamlessly with Microsoft’s Azure ecosystem, allowing for cloud-native deployment, DevOps automation, and secure multi-tenant architecture.
+Chosen option: **".NET Core + React + Azure"**, because it provides a robust, enterprise-ready foundation that supports both immediate and future scalability needs of the CMS. The stack integrates seamlessly with Microsoft’s Azure ecosystem, allowing for cloud-native features essential for the target clients.
 
 This approach directly addresses the CMS’s extensibility and scalability goals:
 
@@ -28,11 +28,16 @@ This approach directly addresses the CMS’s extensibility and scalability goals
 
 ### Consequences
 
-#### Good
+#### Good (Case Study Specific)
+
+* **Enterprise Security Alignment:** The choice of .NET Core and Azure provides native support for enterprise security standards, authentication via Azure AD, and compliance, which is mandatory for the target banking and telecom clients.
+* **Cloud-Native Extensibility:** Integration with Azure’s ecosystem supports future requirements, such as leveraging Azure Cognitive Services to implement the required chatbot integration for problem logging, and Azure App Services for 24/7 high availability.
+* **Streamlined development:** Strong developer tooling (Visual Studio, Azure DevOps) accelerates the CI/CD pipeline, allowing the team to focus on resolving business problems faster.
+
+#### Good (General)
 
 * **Highly scalable:** Azure App Services and Azure SQL Database support elastic scaling based on usage demand.  
 * **Secure and compliant:** Built-in support for role-based access control, encryption, and enterprise authentication through Azure AD.  
-* **Streamlined development:** Strong developer tooling (Visual Studio, Azure DevOps) accelerates the CI/CD pipeline.  
 * **Extensible:** The modular API-first design simplifies adding features like chatbots, analytics, or third-party integrations.  
 * **Cloud-native benefits:** Automatic deployment, monitoring, and rollback capabilities via Azure DevOps pipelines.
 

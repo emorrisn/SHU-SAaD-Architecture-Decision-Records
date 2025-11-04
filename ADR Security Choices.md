@@ -2,7 +2,7 @@
 
 ## Context and Problem Statement
 
-In a multi-tenant Microservices Architecture, the system must ensure the highest level of security for data both in transit and at rest, as required by financial and telecom compliance standards (validated by the System Administrator, Elena Petrova). Specifically, the Complaint Management System (CMS) faces two key challenges:
+In a multi-tenant Microservices Architecture, the system must ensure the highest level of security for data both in transit and at rest, as required by financial and telecom compliance standards. Specifically, the Complaint Management System (CMS) faces two key challenges:
 
 1. **Secrets Management:** Service-to-service communication and database connections rely on credentials. Hard-coding these credentials or using decentralized configuration files creates security risks, prevents automated key rotation, and makes auditing difficult.
 
@@ -20,7 +20,7 @@ How can we implement a security foundation based on Zero-Trust principles to man
 
 ## Decision Outcome
 
-Chosen option: “Zero-Trust with Centralized Secrets Vault and TLS”, as it provides a strong, auditable security posture while minimizing the operational complexity of a full service mesh implementation.
+Chosen option: “Zero-Trust with Centralized Secrets Vault and TLS”, because it provides the necessary defense-in-depth and compliance required for handling highly sensitive customer data (e.g. reports of false transactions or stolen debit cards) for large enterprise clients.
 
 This approach aligns with fundamental architectural security practices:
 
@@ -30,19 +30,19 @@ This approach aligns with fundamental architectural security practices:
 
 * **Auditability:** Every interaction with the Secrets Vault and every attempt at data access (as detailed in the 'Verify Multi-Tenant Data Isolation' story) will be recorded in the Audit Log Service, ensuring full accountability and compliance.
 
-## Consequences
+### Consequences
 
-### Good
+#### Good
 
-* **Automated Key Rotation:** Enables the scheduled, safe rotation of database and API credentials, dramatically reducing the risk associated with compromised long-lived keys.
+* **Compliance for Sensitive Data:** Enforcing TLS and using a Secrets Vault meets the strict regulatory requirements of the Banking and Telecom sectors for protecting sensitive client data.
 
-* **Compliance:** Meets regulatory requirements for encrypting data in transit and protecting credentials, supporting the System Administrator's (Elena's) compliance goals.
+* **Automated Key Rotation:** Enables the scheduled, safe rotation of database and API credentials, dramatically reducing the risk associated with compromised long-lived keys, which is a key security requirement for enterprise systems.
 
-* **Defense-in-Depth:** Implements multiple layers of security (authentication at the API Gateway, authorization in the Domain Layer, and encryption at the transport layer).
+* **Defense-in-Depth:** Implements multiple layers of security (Authentication at the API Gateway, Authorization in the Domain Layer, and Encryption at the transport layer), satisfying the high-security posture required by large enterprise clients.
 
 * **Simplified Auditing:** A central log for all secret access and data queries simplifies security investigations and provides undeniable proof of access control enforcement.
 
-### Bad
+#### Bad
 
 * **External Dependency:** The entire system is now dependent on the availability and performance of the Secrets Vault service. Robust failover and caching mechanisms are mandatory.
 

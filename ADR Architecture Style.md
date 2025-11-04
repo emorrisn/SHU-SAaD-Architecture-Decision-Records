@@ -28,10 +28,15 @@ This approach is most suitable for the Complaint Management System as it:
 
 ### Consequences
 
-#### Good
+#### Good (Case Study Specific)
+
+* **Multi-Tenancy Isolation:** Microservices allow for strong logical data isolation, which is critical for managing distinct client data (e.g. NatWest/HSBC and Vodafone/O2) and adhering to the financial and telecom compliance standards implicit in the case study.
+* **Extensibility for Chatbot Integration:** Isolated service boundaries simplify the future integration of a Chatbot (as specified in the case study brief) by treating the chatbot as a new, independent microservice.
+* **Fault tolerance:** Isolated service boundaries prevent a single point of failure, essential for the 24/7 availability requirement.
+
+#### Good (General)
 
 * **High scalability:** Services can be scaled independently to meet demand without affecting the rest of the system.  
-* **Fault tolerance:** Isolated service boundaries prevent a single point of failure.  
 * **Faster development and deployment:** Independent pipelines enable continuous delivery for specific features.  
 * **Multi-tenancy flexibility:** Easier to provide tenant-specific configurations, deployments, and data isolation.  
 * **Future-proof design:** Easier integration with new technologies or third-party APIs.
