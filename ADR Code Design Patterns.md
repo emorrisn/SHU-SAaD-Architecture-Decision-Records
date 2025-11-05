@@ -26,13 +26,13 @@ This is implemented as seen in the C4 Level 4 Structural and Behavioural Diagram
 
 ### Consequences
 
-#### Good (Case Study Specific)
+#### Advantages (Case Study Specific)
 
 * **Enhanced Reliability for 24/7 Operations (Repository Pattern):** The use of the Repository Pattern is vital because it allows the LogComplaintHandler to be unit tested independently. This rigorous testing minimizes defects in the core business logic, directly supporting the non-functional requirement for 24/7 system availability.
 * **Centralized Complaint Lifecycle Integrity (Factory Method):** The Factory Method guarantees that a new complaint is always initialized correctly (e.g. with a unique ID and the initial status='Logged'). This is crucial for managing the full complaint lifecycle (logging, allocation, resolving, closure) mentioned in the case study brief.
 * **Decoupling (Repository Pattern):** The business logic is independent of the database stack, ensuring long-term flexibility and maintainability for the platform supporting large enterprise clients.
 
-#### Good (General)
+#### Advantages (General)
 
 * **Enhanced Testability (Repository Pattern):** The LogComplaintHandler can be unit tested by mocking the IComplaintRepository interface (e.g. using Moq in .NET). This eliminates the need for expensive database setups during local development and CI/CD pipelines.
 
@@ -40,7 +40,12 @@ This is implemented as seen in the C4 Level 4 Structural and Behavioural Diagram
 
 * **Adherence to DIP:** The reliance on the IComplaintRepository interface over the concrete implementation strictly follows the Dependency Inversion Principle of SOLID.
 
-#### Bad
+#### Disadvantages (Case Study Specific)
+
+* **Added Development Overhead:** For smaller teams or early-stage proof-of-concepts, introducing repository abstractions can slow delivery of initial CMS prototypes.
+* **Learning Curve for Team:** Developers new to the project must understand how handlers, repositories, and domain entities interact before effectively contributing to the complaint workflow logic.
+
+#### Disadvantages (General)
 
 * **Increased Amount of Code:** Implementing the Repository Pattern introduces two extra files (an interface and a concrete class) for data access.
 * **Initial Complexity:** Developers new to the project must understand the strict separation between the Handler, Repository, and Entity, which requires a slight initial learning curve.

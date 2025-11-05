@@ -32,20 +32,27 @@ This approach aligns with fundamental architectural security practices:
 
 ### Consequences
 
-#### Good
+#### Advantages (Case Study Specific)
 
-* **Compliance for Sensitive Data:** Enforcing TLS and using a Secrets Vault meets the strict regulatory requirements of the Banking and Telecom sectors for protecting sensitive client data.
+* **Compliance with Sector Standards:** Meets strict data protection mandates for Banking and Telecom clients (e.g. safeguarding financial transactions and customer identity information).
+* **Audit Readiness:** Every secret access and authentication event is recorded in the Audit Log Service, supporting investigations and demonstrating regulatory compliance.
+* **Reduced Breach Risk:** Automated key rotation prevents misuse of static credentials, directly addressing the enterprise-level security expectations described in the CMS brief.
+* **Cross-Tenant Isolation Enforcement:** Secrets scoped per tenant prevent data access leaks between organisations (e.g. preventing NatWest credentials from being accessible by Vodafone services).
 
-* **Automated Key Rotation:** Enables the scheduled, safe rotation of database and API credentials, dramatically reducing the risk associated with compromised long-lived keys, which is a key security requirement for enterprise systems.
+#### Advantages (General)
 
-* **Defense-in-Depth:** Implements multiple layers of security (Authentication at the API Gateway, Authorization in the Domain Layer, and Encryption at the transport layer), satisfying the high-security posture required by large enterprise clients.
+* **Defense-in-Depth Security:** Layers of protection across authentication, authorization, and encryption strengthen the system’s resilience against intrusion.
+* **Automated Credential Management:** Centralized control simplifies secret renewal and rotation processes, improving long-term maintainability.
+* **Improved Observability:** Central audit logs make tracking access patterns straightforward, facilitating proactive security monitoring.
+* **Standardized Encryption Practices:** Uniform TLS usage ensures consistency across all services and environments.
 
-* **Simplified Auditing:** A central log for all secret access and data queries simplifies security investigations and provides undeniable proof of access control enforcement.
+#### Disadvantages (Case Study Specific)
 
-#### Bad
+* **Critical Vault Dependency:** If the Secrets Vault experiences downtime, tenant services may temporarily lose access to critical credentials, impacting complaint logging or resolution.
+* **Operational Complexity for Multi-Tenant Environments:** Managing per-tenant credentials and certificates requires careful design and maintenance of tenant-specific policies.
 
-* **External Dependency:** The entire system is now dependent on the availability and performance of the Secrets Vault service. Robust failover and caching mechanisms are mandatory.
+#### Disadvantages (General)
 
-* **Certificate Management:** Requires disciplined management of TLS certificates (issuance, renewal, and revocation) for service endpoints.
-
-* **Increased Latency:** TLS handshakes and encryption/decryption add a small, measurable overhead to all network communication, though this is a necessary trade-off for security.
+* **Certificate Management Overhead:** Ongoing management of TLS certificates (issuance, renewal, and revocation) adds operational workload.
+* **Increased Latency:** TLS negotiation and encryption/decryption introduce minor overhead for every request, though necessary for secure communication.
+* **Dependency on External Infrastructure:** The solution’s reliability depends on the performance and availability of the Vault and certificate authority systems.

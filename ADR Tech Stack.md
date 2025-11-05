@@ -28,22 +28,29 @@ This approach directly addresses the CMS’s extensibility and scalability goals
 
 ### Consequences
 
-#### Good (Case Study Specific)
+### Advantages (Case Study Specific)
 
-* **Enterprise Security Alignment:** The choice of .NET Core and Azure provides native support for enterprise security standards, authentication via Azure AD, and compliance, which is mandatory for the target banking and telecom clients.
-* **Cloud-Native Extensibility:** Integration with Azure’s ecosystem supports future requirements, such as leveraging Azure Cognitive Services to implement the required chatbot integration for problem logging, and Azure App Services for 24/7 high availability.
-* **Streamlined development:** Strong developer tooling (Visual Studio, Azure DevOps) accelerates the CI/CD pipeline, allowing the team to focus on resolving business problems faster.
+- **Enterprise-Grade Security Compliance:** Alignment with Azure AD, Key Vault, and Microsoft’s compliance framework satisfies the strict banking and telecom security requirements in the CMS case study.  
+- **Cloud-Native Extensibility:** Azure Cognitive Services and Bot Framework enable the chatbot feature outlined in the future scope, while Azure App Services ensure 24/7 availability.  
+- **Rapid Enterprise Deployment:** Tight integration with Azure DevOps accelerates continuous integration and delivery, ensuring faster rollout of updates for large clients like NatWest or Vodafone.  
+- **Consistent Multi-Tenant Support:** Azure’s identity and network isolation capabilities simplify secure multi-tenant configurations for multiple enterprise customers.  
 
-#### Good (General)
+### Advantages (General)
 
-* **Highly scalable:** Azure App Services and Azure SQL Database support elastic scaling based on usage demand.  
-* **Secure and compliant:** Built-in support for role-based access control, encryption, and enterprise authentication through Azure AD.  
-* **Extensible:** The modular API-first design simplifies adding features like chatbots, analytics, or third-party integrations.  
-* **Cloud-native benefits:** Automatic deployment, monitoring, and rollback capabilities via Azure DevOps pipelines.
+* **Scalable and Reliable:** Azure App Services, SQL Database, and container orchestration allow automatic scaling and resilience.  
+* **Modular and Maintainable:** Clear API-first design with independent frontend and backend layers promotes easier maintenance and feature evolution.  
+* **Comprehensive Security Stack:** Role-based access control, data encryption, and managed identity services provide strong security foundations.  
+* **Developer Efficiency:** Mature tooling (Visual Studio, Azure DevOps) supports efficient CI/CD pipelines and streamlined debugging.  
+* **Future-Proof Platform:** Built-in support for AI, analytics, and monitoring within Azure simplifies long-term evolution without major re-architecture.  
 
-#### Bad
+### Disadvantages (Case Study Specific)
 
-* **Higher cost:** Azure hosting and Microsoft licensing can increase operational expenses compared to open-source alternatives.  
-* **Vendor lock-in:** Deep integration with Azure services may make migration to other cloud providers difficult.  
-* **Learning curve:** Teams unfamiliar with .NET Core and Azure services may require training and onboarding time.  
-* **Complexity in setup:** Multi-service deployment pipelines require proper DevOps configuration to avoid integration issues.
+* **Higher Cost for Enterprise Clients:** Azure hosting and managed services may increase operational expenses for financial and telecom clients compared to open-source or hybrid options.  
+* **Vendor Dependence:** Deep reliance on Azure-specific features (e.g. Key Vault, App Insights) may create migration challenges if clients later adopt other cloud providers.  
+
+### Disadvantages (General)
+
+* **Learning Curve:** Developers unfamiliar with .NET Core or Azure services require onboarding time to become productive.  
+* **Complex DevOps Configuration:** Multi-service pipelines and environment-specific settings increase initial setup complexity.  
+* **Licensing and Subscription Management:** Azure’s tiered pricing and service quotas require active cost monitoring.  
+* **Less Cross-Cloud Flexibility:** Heavy integration with Azure limits portability compared to more cloud-agnostic solutions.  

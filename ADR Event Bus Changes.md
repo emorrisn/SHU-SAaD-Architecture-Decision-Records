@@ -18,13 +18,28 @@ The Complaint Service will adopt a Hybrid Persistence Model:
 
 ### Consequences
 
-#### Good
+#### Advantages (Case Study Specific)
 
-* **Immediate Read Consistency:** The Complaint Query Service can immediately read the updated state from the database, satisfying the Consumer's need for instant status confirmation and the Help Desk Agent's need for real-time task allocation.
-* **Simplified Transaction Management:** Leverages the database's native ACID properties, simplifying error handling and rollback in the core write path, which is critical for handling a high volume of time-sensitive complaints.
-* **Maintained Loose Coupling:** Downstream services like the Notification Service and Reporting Service remain decoupled and are still updated asynchronously via Kafka, supporting the scalability goals of the Microservices Architecture.
+* **Immediate Complaint Status Updates:** Consumers and Help Desk Agents receive real-time confirmation when a complaint is logged, aligning with the case study’s requirement for responsiveness and accuracy.
+* **Enforced Multi-Tenant Security:** Tenant and authorization checks occur before the database commit, ensuring that no cross-tenant data exposure occurs between clients (e.g. NatWest and Vodafone).
+* **Improved User Confidence:** The immediate feedback loop supports user trust in large enterprise contexts, where customers expect reliable, real-time updates.
+* **Simplified SLA Compliance:** Synchronous persistence helps meet service-level commitments for logging and confirming complaints within strict response times.
 
-#### Bad
+#### Advantages (General)
 
-* Increased Write Latency: The synchronous commit adds the database transaction time to the overall command execution time.
-* Tight Database Coupling: The availability of the Complaint Service's write path is now directly dependent on the availability of the PostgreSQL database.
+* **Immediate Read Consistency:** The Query Service can instantly reflect the latest complaint state without waiting for asynchronous event propagation.
+* **Simplified Transaction Management:** Relies on database ACID properties for rollback and consistency, reducing complexity in error handling.
+* **Balanced Scalability:** Downstream services (e.g. Notifications, Reporting) remain loosely coupled through Kafka, preserving microservice scalability and resilience.
+* **Clear System of Record:** Maintains a single authoritative source of truth, simplifying auditing and debugging.
+
+#### Disadvantages (Case Study Specific)
+
+* **Database Dependency for Availability:** The Complaint Service’s write path is now tied directly to PostgreSQL uptime — any outage affects complaint logging, which may challenge the 24/7 availability target.
+* **Potential Performance Bottleneck for Large Clients:** As tenants like HSBC or Vodafone scale up, database contention may increase, requiring optimisations such as sharding or caching.
+
+#### Disadvantages (General)
+
+* **Increased Write Latency:** Synchronous commits extend overall command execution time before acknowledgment.
+* **Reduced Architectural Purity:** Mixing synchronous and asynchronous flows introduces added coordination complexity.
+* **Operational Overhead:** Monitoring both synchronous DB transactions and asynchronous event publishing requires more sophisticated observability setups.
+* **Tighter Coupling to Data Layer:** The write path becomes more dependent on database health and connection stability.
